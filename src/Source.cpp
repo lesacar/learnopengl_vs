@@ -29,7 +29,7 @@ int main() {
     glfwSetErrorCallback(error_callback);
     glfwSetKeyCallback(window->window, key_callback);
     glfwSetFramebufferSizeCallback(window->window, framebuffer_resize_callback);
-    glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
+
 
     while (!glfwWindowShouldClose(window->window)) {
         frameWaitSleep.start();

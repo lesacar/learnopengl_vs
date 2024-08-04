@@ -43,6 +43,7 @@ Window::Window(uint32_t width, uint32_t height, std::string name)
 	glViewport(0, 0, width, height);
 
 	printf("FrameBuffer size (pixels): %d\n", width * height);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
 }
 
 Window::~Window()
