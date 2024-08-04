@@ -73,18 +73,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\vendor\libs;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(SolutionDir)src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\vendor\libs;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(SolutionDir)src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\vendor\libs;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(SolutionDir)src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\vendor\libs;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(SolutionDir)src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -167,8 +171,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="src\Source.cpp" />
+    <ClCompile Include="src\Timer.cpp" />
     <ClCompile Include="vendor\glad\glad.c" />
+    <ClCompile Include="src\VSync.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Core.h" />
+    <ClInclude Include="src\Timer.h" />
+    <ClInclude Include="src\VSync.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
