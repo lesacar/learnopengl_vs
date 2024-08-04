@@ -15,6 +15,9 @@ Timer::Timer(const std::string& name, double a_desiredWait_ms, bool vsync)
 	: name(name), begin(0), end(0), desiredWait_ms(a_desiredWait_ms), sleepFor(0), elapsed_ms(0), vsyncObj(nullptr)
 {
 	vsyncObj = new VSync(vsync);
+	if (!vsync) { printf("Sleeping for %.2fms/frame\n", desiredWait_ms); }
+	else { printf("Not sleeping\n"); }
+
 	if (vsyncObj == nullptr) { std::cout << "NULL error" << std::endl; }
 	std::cout << "Instantiated Timer \"" << this->name << "\"" << std::endl;
 }

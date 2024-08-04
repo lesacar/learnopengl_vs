@@ -1,5 +1,6 @@
 #include "VSync.h"
 #include <GLFW/glfw3.h>
+#include <cstdio>
 #include <iostream>
 
 void VSync::set(bool vsync) {
@@ -12,6 +13,7 @@ void VSync::set(bool vsync) {
     else
     {
         std::cout << "VSync OFF" << std::endl;
+
         glfwSwapInterval(0);
     }
     this->Vsync = vsync;
