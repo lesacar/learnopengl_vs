@@ -1,7 +1,9 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.6)
 
 # Set the project name
 project(Engine)
+
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Engine)
 
 # Set output directories for binaries and object files
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/bin)
@@ -22,12 +24,15 @@ add_subdirectory(${VENDOR_DIR}/glfw)
 
 # Find all .cpp files in the src directory
 file(GLOB_RECURSE SRC_FILES ${SOURCE_DIR}/*.cpp)
+file(GLOB_RECURSE HEADER_FILES ${SOURCE_DIR}/*.h ${SOURCE_DIR}/include/*.h )
 
 # Add vendor/glad/glad.c explicitly
 set(SRC_FILES ${SRC_FILES} ${VENDOR_DIR}/glad/glad.c)
 
 # Specify the executable target
-add_executable(Engine ${SRC_FILES})
+add_executable(Engine ${SRC_FILES} ${HEADER_FILES})
+
+target_compile_features(Engine PRIVATE cxx_std_17)
 
 # Link the GLFW library to your project
 target_link_libraries(Engine PRIVATE glfw)
