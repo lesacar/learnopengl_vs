@@ -1,0 +1,7 @@
+-Isrc
+-Isrc/include
+-Ivendor/glfw/include
+-Ivendor/glm/include
+-Ivendor/glad/include
+-xc++
+
