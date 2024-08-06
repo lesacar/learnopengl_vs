@@ -38,7 +38,7 @@ target_compile_features(Engine PRIVATE cxx_std_17)
 target_link_libraries(Engine PRIVATE glfw)
 
 # Include directories for the project
-target_include_directories(Engine PRIVATE ${INCLUDE_DIR}/include ${INCLUDE_DIR} ${VENDOR_DIR}/glfw/include ${VENDOR_DIR}/glm/include ${VENDOR_DIR}/glad/include )
+target_include_directories(Engine PRIVATE ${INCLUDE_DIR}/include ${INCLUDE_DIR} ${VENDOR_DIR}/glfw/include ${VENDOR_DIR}/glm/include ${VENDOR_DIR}/glad/include ${VENDOR_DIR}/stb_image/include )
 
 # Additional configurations and dependencies as necessary
 
