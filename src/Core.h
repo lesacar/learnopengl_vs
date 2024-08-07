@@ -2,6 +2,7 @@
 #include <string>
 #include "Timer.h"
 #include <Window.h>
+#include <MyGui.h>
 
 #ifdef _WIN32
 extern std::string resPath;
