@@ -190,6 +190,8 @@ int main()
         lightingShader.setVec3("lightColor", lightColorVec);
         lightingShader.setVec3("lightPos", lightPos);
 
+
+
         // view/projection transformations
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
@@ -199,6 +201,8 @@ int main()
         // world transformation
         glm::mat4 model = glm::mat4(1.0f);
         lightingShader.setMat4("model", model);
+
+		lightingShader.setVec3("viewPos", camera.Position);
 
         // render the cube
         glBindVertexArray(cubeVAO);
