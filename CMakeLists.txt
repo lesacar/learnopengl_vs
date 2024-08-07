@@ -24,10 +24,13 @@ file(GLOB_RECURSE SRC_FILES ${SOURCE_DIR}/*.cpp)
 file(GLOB_RECURSE HEADER_FILES ${SOURCE_DIR}/*.h ${SOURCE_DIR}/include/*.h)
 
 set(SRC_FILES ${SRC_FILES} ${VENDOR_DIR}/glad/glad.c)
-set(SRC_FILES ${SRC_FILES} ${VENDOR_DIR}/imgui/backends/imgui_impl_opengl3.cpp)
-set(SRC_FILES ${SRC_FILES} ${VENDOR_DIR}/imgui/backends/imgui_impl_glfw.cpp)
+# set(SRC_FILES ${SRC_FILES} ${VENDOR_DIR}/imgui/backends/imgui_impl_opengl3.cpp)
+# set(SRC_FILES ${SRC_FILES} ${VENDOR_DIR}/imgui/backends/imgui_impl_glfw.cpp)
 
-file(GLOB IMGUI_SRC_FILES ${VENDOR_DIR}/imgui/*.cpp)
+file(GLOB IMGUI_SRC_FILES ${VENDOR_DIR}/imgui/*.cpp
+    ${VENDOR_DIR}/imgui/backends/imgui_impl_opengl3.cpp
+    ${VENDOR_DIR}/imgui/backends/imgui_impl_glfw.cpp
+)
 file(GLOB IMGUI_HEADER_FILES ${VENDOR_DIR}/imgui/*.h)
 set(SRC_FILES ${SRC_FILES} ${IMGUI_SRC_FILES})
 set(HEADER_FILES ${HEADER_FILES} ${IMGUI_HEADER_FILES})
