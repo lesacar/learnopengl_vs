@@ -48,7 +48,10 @@ void Timer::sleep() {
 	}
 	if (!vsyncObj->get())
 	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<long long>(sleepFor)));
+		auto now = std::chrono::steady_clock::now();
+		std::this_thread::sleep_until(now + std::chrono::microseconds((int)sleepFor * 900));
+		auto SEE_ME_IN_DEBUG = ((now + std::chrono::microseconds((int)sleepFor * 1000)) - now);
+		// std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<long long>(sleepFor)));
 	}
 	
 }

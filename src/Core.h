@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include "Timer.h"
 #include <Window.h>
 #include <MyGui.h>
 

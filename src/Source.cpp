@@ -38,7 +38,6 @@ glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
 int main()
 {
-    Timer frameTimer("frame timer", 13.3333, true);
     // glfw: initialize and configure
     // ------------------------------
     glfwInit();
@@ -76,6 +75,7 @@ int main()
         return -1;
     }
 	MyGui mygui(window);
+    glfwSwapInterval(1);
     // configure global opengl state
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
@@ -160,6 +160,7 @@ int main()
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
+    glm::vec3 objectColor(1.0f, 0.5f, 0.31f);
 
     // render loop
     // -----------
@@ -171,8 +172,6 @@ int main()
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
         // printf("FPS: %f/%f\n", (1/deltaTime), deltaTime);
-        frameTimer.start();
-
 
         // input
         // -----
@@ -186,7 +185,7 @@ int main()
 		mygui.BeginFrame();
         // be sure to activate shader when setting uniforms/drawing objects
         lightingShader.use();
-        lightingShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
+        lightingShader.setVec3("objectColor", objectColor);
         lightingShader.setVec3("lightColor", lightColorVec);
         lightingShader.setVec3("lightPos", lightPos);
 
@@ -211,6 +210,7 @@ int main()
 
         // also draw the lamp object
         lightCubeShader.use();
+        lightCubeShader.setVec3("lightCubeColor", lightColorVec);
         lightCubeShader.setMat4("projection", projection);
         lightCubeShader.setMat4("view", view);
         model = glm::mat4(1.0f);
@@ -223,12 +223,17 @@ int main()
 
         unsigned int lightColorUniform = glGetUniformLocation(lightingShader.ID, "lightColor");
         {
-            ImGui::SliderFloat3("LightColor", &lightColorVec.x, 0.0f, 1.0f);
+            ImGui::SliderFloat3("Light Color", &lightColorVec.x, 0.0f, 1.0f);
+            ImGui::SliderFloat3("Cube Color", &objectColor.x, 0.0f, 1.0f);
+            ImGui::SliderFloat3("LightCubePos", &lightPos.x, 0.0f, 5.0f);
             ImGui::Text("FPS %.1f", ImGui::GetIO().Framerate);
+            // ImGui::SliderFloat3("Light Color", &lightCubeColor.x, 0.0f, 1.0f);
         }
-        lightingShader.setVec3("lightColor", lightColorVec);
+
+        // lightingShader.setVec3("lightColor", lightColorVec);
+
 		mygui.EndFrame();
-        frameTimer.sleep();
+        
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
