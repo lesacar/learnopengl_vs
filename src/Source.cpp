@@ -20,8 +20,8 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 void moveLightSource(glm::vec3 lightPosition);
 
 // settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 1200;
+const unsigned int SCR_HEIGHT = 900;
 
 bool cursor = true;
 
@@ -156,7 +156,7 @@ int main()
     unsigned int lightCubeVAO;
     glGenVertexArrays(1, &lightCubeVAO);
     glBindVertexArray(lightCubeVAO);
-    glm::vec3 lightColorVec(1.0f, 1.0f, 1.0f);
+    glm::vec3 lightColorVec(0.2f, 0.2f, 0.2f);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     // note that we update the lamp's position attribute's stride to reflect the updated buffer data
@@ -188,6 +188,15 @@ int main()
 		mygui.BeginFrame();
         // be sure to activate shader when setting uniforms/drawing objects
         lightingShader.use();
+        lightingShader.setVec3("material.ambient", objectColor);
+        lightingShader.setVec3("material.diffuse", objectColor);
+        lightingShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+        lightingShader.setFloat("material.shininess", 264.0f);
+
+        lightingShader.setVec3("light.ambient", lightColorVec);
+        lightingShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f); // darken diffuse light a bit
+        lightingShader.setVec3("light.specular", lightColorVec);
+
         lightingShader.setVec3("objectColor", objectColor);
         lightingShader.setVec3("lightColor", lightColorVec);
         lightingShader.setVec3("lightPos", lightPos);
@@ -203,7 +212,6 @@ int main()
         // world transformation
         glm::mat4 model = glm::mat4(1.0f);
         lightingShader.setMat4("model", model);
-
 		lightingShader.setVec3("viewPos", camera.Position);
 
         // render the cube
@@ -219,7 +227,12 @@ int main()
             lightPos.z = (cos(glfwGetTime()) * 2);
         }
         lightCubeShader.use();
-        lightCubeShader.setVec3("lightCubeColor", lightColorVec);
+        
+        lightCubeShader.setVec3("light.ambient", lightColorVec);
+        lightCubeShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f); // darken diffuse light a bit
+        lightCubeShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+
+        // lightCubeShader.setVec3("lightCubeColor", lightColorVec);
         lightCubeShader.setMat4("projection", projection);
         lightCubeShader.setMat4("view", view);
         model = glm::mat4(1.0f);
