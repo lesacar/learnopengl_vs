@@ -17,6 +17,8 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow *window);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
+void moveLightSource(glm::vec3 lightPosition);
+
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -28,6 +30,7 @@ Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
+bool lightSourceMoving = false;
 
 // timing
 float deltaTime = 0.0f;	
@@ -209,6 +212,12 @@ int main()
 
 
         // also draw the lamp object
+        if (lightSourceMoving)
+        {
+            lightPos.x = (sin(glfwGetTime()) * 1);
+            lightPos.y = (sin(glfwGetTime() * 1));
+            lightPos.z = (cos(glfwGetTime()) * 2);
+        }
         lightCubeShader.use();
         lightCubeShader.setVec3("lightCubeColor", lightColorVec);
         lightCubeShader.setMat4("projection", projection);
@@ -319,6 +328,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     {
         if (cursor)
         {
+            firstMouse = true;
             glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         }
         else
@@ -327,4 +337,13 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         }
         cursor = !cursor;
     }
+    if (key == GLFW_KEY_M && action == GLFW_PRESS)
+    {
+        lightSourceMoving = !lightSourceMoving;
+    }
+}
+void moveLightSource(glm::vec3 lightPosition)
+{
+
+    return;
 }
